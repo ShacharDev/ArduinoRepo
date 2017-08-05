@@ -1,0 +1,5 @@
+Manual for distance sensor with wiring
+https://www.dfrobot.com/wiki/index.php/Basic_Kit_for_Cherokey_4WD_SKU:ROB0117
+
+Manual for distance sensor with code
+https://www.dfrobot.com/wiki/index.php/URM37_V4.0_Ultrasonic_Sensor_(SKU:SEN0001)

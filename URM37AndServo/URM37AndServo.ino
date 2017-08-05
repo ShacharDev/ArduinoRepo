@@ -13,9 +13,12 @@ int sweepFlag = 1;
 int URPWM = 3; // PWM Output 0－25000US，Every 50US represent 1cm
 int URTRIG= 10; // PWM trigger pin
 uint8_t EnPwmCmd[4]={0x44,0x02,0xbb,0x01};    // distance measure command
+enum ObstacleManuverState { eDetectObstacle, eReverse, eMakeTurn, eStop }; 
 
 int m_NumObstacles = 0;
 int m_LastDistanceAverage = 0;
+ObstacleManuverState m_ObstacleManuverState = eDetectObstacle;
+int m_StateStartTime = 0;
 
 // motor control 
 //Standard PWM DC control
@@ -36,6 +39,7 @@ void setup(){                                 // Serial initialization
   Serial.begin(115200);                         // Sets the baud rate to 9600
   SensorSetup();
   MotorSetup();
+  
 }
  
 void loop(){
@@ -48,27 +52,54 @@ void loop(){
   {
     actualDistance = MeasureDistance();
     m_LastDistanceAverage = (m_LastDistanceAverage * 4 + actualDistance) / 5;
-    if (m_LastDistanceAverage < 50)
+    switch (m_ObstacleManuverState)
     {
+     case eDetectObstacle:
+     if (m_LastDistanceAverage < 50)
+     {
       back_off (255,255);   //move back in max speed
-      delay(2000);
-      turn_R (100,100);
-      delay(2000);
-      advance (100,100);   //move forward in max speed
-      
-      if (m_NumObstacles++ > 2)
+      m_ObstacleManuverState = eReverse;
+      m_StateStartTime = millis();
+
+      // check for stop condition
+      if (m_NumObstacles++ > 5)
+      {
         stop();
+        m_ObstacleManuverState = eStop; // move to undefined state
+      }
+     }
+     break;
+
+     case eReverse:
+      if (millis() - m_StateStartTime >= 2000)
+      {
+        advance (100,100);   //move forward in max speed
+        turn_L(100,150);       
+        m_StateStartTime = millis();
+        m_ObstacleManuverState = eMakeTurn;
+      }
+     break;
+      
+     case eMakeTurn:
+      if (millis() - m_StateStartTime >= 2000)
+      {
+        advance(100,100);   //move forward 
+        m_ObstacleManuverState = eDetectObstacle;
+      }
+     break;
+
+     
     }
-    
+          
     Serial.println(actualDistance);
-    delay(100);
+    delay(50);
   }
 
- /*
+ 
   if(sweepServo.check() == 1){
     servoSweep();
   }
- */
+ 
 }
 
 void SensorSetup(){ 
