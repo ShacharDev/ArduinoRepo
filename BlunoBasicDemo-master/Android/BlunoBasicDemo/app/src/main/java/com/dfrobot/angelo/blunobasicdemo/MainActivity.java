@@ -13,6 +13,10 @@ import android.widget.TextView;
 public class MainActivity  extends BlunoLibrary {
 	private Button buttonScan;
 	private Button buttonSerialSend;
+	private Button buttonFWD;
+	private Button buttonBack;
+	private Button buttonLeft;
+	private Button buttonRight;
 	private EditText serialSendText;
 	private TextView serialReceivedText;
 	
@@ -36,6 +40,50 @@ public class MainActivity  extends BlunoLibrary {
 				// TODO Auto-generated method stub
 
 				serialSend(serialSendText.getText().toString());				//send the data to the BLUNO
+			}
+		});
+
+		buttonFWD = (Button) findViewById(R.id.buttonFWD);		//initial the button for sending the data
+		buttonFWD.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				serialSend("w");				//send the data to the BLUNO
+			}
+		});
+
+		buttonBack = (Button) findViewById(R.id.buttonBack);		//initial the button for sending the data
+		buttonBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				serialSend("s");				//send the data to the BLUNO
+			}
+		});
+
+		buttonLeft = (Button) findViewById(R.id.buttonLeft);		//initial the button for sending the data
+		buttonLeft.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				serialSend("a");				//send the data to the BLUNO
+			}
+		});
+
+		buttonRight = (Button) findViewById(R.id.buttonRight);		//initial the button for sending the data
+		buttonRight.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				serialSend("d");				//send the data to the BLUNO
 			}
 		});
 
