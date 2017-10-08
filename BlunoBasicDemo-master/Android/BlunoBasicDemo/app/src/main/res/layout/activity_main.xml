@@ -108,18 +108,6 @@
             android:visibility="visible" />
 
         <Button
-            android:id="@+id/buttonFWD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button"
-            android:layout_column="1"
-            android:layout_marginTop="47dp"
-            android:layout_row="0"
-            android:layout_toEndOf="@+id/buttonScan"
-            android:text="FWD"
-            android:visibility="visible" />
-
-        <Button
             android:id="@+id/buttonLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,6 +117,30 @@
             android:layout_row="1"
             android:layout_toEndOf="@+id/buttonScan"
             android:text="Left"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/buttonStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/button"
+            android:layout_column="1"
+            android:layout_marginTop="47dp"
+            android:layout_row="1"
+            android:layout_toEndOf="@+id/buttonScan"
+            android:text="STOP"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/buttonFWD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/button"
+            android:layout_column="1"
+            android:layout_marginTop="47dp"
+            android:layout_row="0"
+            android:layout_toEndOf="@+id/buttonScan"
+            android:text="FWD"
             android:visibility="visible" />
     </GridLayout>
 

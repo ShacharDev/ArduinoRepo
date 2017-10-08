@@ -17,6 +17,7 @@ public class MainActivity  extends BlunoLibrary {
 	private Button buttonBack;
 	private Button buttonLeft;
 	private Button buttonRight;
+	private Button buttonStop;
 	private EditText serialSendText;
 	private TextView serialReceivedText;
 	
@@ -72,7 +73,7 @@ public class MainActivity  extends BlunoLibrary {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				serialSend("a");				//send the data to the BLUNO
+				serialSend("d");				//send the data to the BLUNO
 			}
 		});
 
@@ -83,7 +84,18 @@ public class MainActivity  extends BlunoLibrary {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				serialSend("d");				//send the data to the BLUNO
+				serialSend("a");				//send the data to the BLUNO
+			}
+		});
+
+		buttonStop = (Button) findViewById(R.id.buttonStop);		//initial the button for sending the data
+		buttonStop.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				serialSend("x");				//send the data to the BLUNO
 			}
 		});
 
